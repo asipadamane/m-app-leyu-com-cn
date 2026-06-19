@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://asipadamane.github.io/m-app-leyu-com-cn/sitemap.xml
