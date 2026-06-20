@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绿茵故事 · 中超直播</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #e9f3f1 0%, #d1e6e1 100%);
+            color: #1b3b3a;
+            line-height: 1.7;
+            padding: 1.5rem 1rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 960px;
+            width: 100%;
+            background: rgba(255, 255, 245, 0.75);
+            backdrop-filter: blur(6px);
+            border-radius: 2.5rem;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 20px 40px -16px rgba(30, 55, 50, 0.25);
+            border: 1px solid #bcd9d4;
+        }
+
+        /* 开场短句 — 故事引子 */
+        .opening {
+            font-size: 1.8rem;
+            font-weight: 450;
+            letter-spacing: 1px;
+            color: #1f5c57;
+            margin-bottom: 0.3rem;
+            padding-left: 0.25rem;
+            border-left: 5px solid #359e94;
+            padding-left: 1rem;
+        }
+
+        .opening span {
+            display: inline-block;
+            background: #cde7e2;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #0b4a44;
+            margin-right: 0.4rem;
+        }
+
+        /* 承接段落 */
+        .continuation {
+            margin: 1.8rem 0 1.2rem;
+            font-size: 1.05rem;
+            color: #204e49;
+            padding: 0.2rem 0.3rem;
+        }
+
+        .continuation p {
+            margin-bottom: 1.2rem;
+        }
+
+        .continuation a {
+            color: #1d7b6f;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #9ccfc6;
+            transition: border-color 0.2s, background 0.2s;
+            padding: 0 0.1rem;
+        }
+
+        .continuation a:hover {
+            border-bottom-color: #0f665b;
+            background: #d5f0ea;
+        }
+
+        /* 特点列表 — 网格卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 2.2rem 0 2rem;
+        }
+
+        .feature-card {
+            background: #e9f7f3;
+            border-radius: 1.8rem;
+            padding: 1.4rem 1.2rem;
+            box-shadow: 0 4px 10px rgba(25, 70, 60, 0.06);
+            border: 1px solid #d6eae4;
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            background: #dff3ed;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(20, 70, 60, 0.08);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 550;
+            color: #1b635a;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .feature-card h3::before {
+            content: "⚽";
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #2b5f58;
+            line-height: 1.6;
+        }
+
+        /* 温和结尾 — 故事尾声 */
+        .gentle-ending {
+            margin: 2.4rem 0 0.8rem;
+            padding: 1.2rem 1rem;
+            background: #d6ece6;
+            border-radius: 2rem;
+            font-size: 1rem;
+            color: #1a4f49;
+            text-align: center;
+            border: 1px solid #b5d9d0;
+            line-height: 1.8;
+        }
+
+        .gentle-ending strong {
+            font-weight: 550;
+            color: #0a4d44;
+        }
+
+        .gentle-ending a {
+            color: #1b7a6b;
+            text-decoration: none;
+            border-bottom: 1.5px dashed #6db9ad;
+            font-weight: 500;
+            transition: border 0.2s;
+        }
+
+        .gentle-ending a:hover {
+            border-bottom-style: solid;
+            border-bottom-color: #1a6b5e;
+        }
+
+        /* 小字 & 提示 */
+        .footnote {
+            margin-top: 2.2rem;
+            font-size: 0.85rem;
+            color: #46756d;
+            border-top: 1px solid #c7ddd6;
+            padding-top: 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.6rem;
+        }
+
+        .footnote span {
+            opacity: 0.8;
+        }
+
+        /* 移动端友好 */
+        @media (max-width: 600px) {
+            body {
+                padding: 0.8rem 0.6rem 2rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+                border-radius: 2rem;
+            }
+
+            .opening {
+                font-size: 1.5rem;
+                padding-left: 0.8rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+
+            .feature-card {
+                padding: 1.2rem 1rem;
+            }
+
+            .gentle-ending {
+                padding: 1rem 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .footnote {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .opening {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 开场短句：故事引子 -->
+        <div class="opening">
+            <span>📖</span> 有一片绿茵，总在傍晚亮起灯。
+        </div>
+
+        <!-- 承接段落 从主题内容展开 温和流畅 -->
+        <div class="continuation">
+            <p>
+                不论你身处哪个城市，周末的傍晚似乎总有一场值得期待的较量。有人习惯打开屏幕，边喝茶边看队员跑位；有人喜欢和几位球友一起，在群里同步点评每一次进攻。那种等待开球的心情，像傍晚的风逐渐凉下来，却让内心一点点热起来。
+            </p>
+            <p>
+                而这样的陪伴，很多时候都落在 <a href="https://cctv-zhongchao.com">中超直播</a> 的字样上——它像一根熟悉的引线，把天南海北的目光牵到同一块场地。没有太多修饰，也无需刻意渲染，画面亮起来的那一刻，故事就已经开始了。
+            </p>
+        </div>
+
+        <!-- 特点列表：网格卡片，蓝绿点缀 -->
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>赛程跟随</h3>
+                <p>从揭幕战到收官轮，每轮焦点场次都能轻松找到。不再担心记错时间，让看球变成一种自然的日常节奏。</p>
+            </div>
+            <div class="feature-card">
+                <h3>画面简洁</h3>
+                <p>直播窗口不堆砌复杂模块，专注于比赛本身。你可以更清晰地看见球员的跑位、草皮的纹理和每一次触球。</p>
+            </div>
+            <div class="feature-card">
+                <h3>多端适应</h3>
+                <p>手机、平板或是电脑，画面比例与清晰度都做了匹配。换个屏幕，熟悉的球队依然在眼前奔跑。</p>
+            </div>
+            <div class="feature-card">
+                <h3>安静陪伴</h3>
+                <p>没有过度喧哗的弹幕墙，也没有频繁弹出的促销浮层。页面保持克制，让观赛的体验更接近坐在看台上的感受。</p>
+            </div>
+        </div>
+
+        <!-- 温和结尾 故事尾声 -->
+        <div class="gentle-ending">
+            <strong>🔹 尾声 · 从屏幕到现场</strong><br>
+            很多年后，也许你会记得某个午后，和朋友一起通过 <a href="https://cctv-zhongchao.com">中超直播</a> 看到了一记漂亮的远射。那可能只是赛季中普通的一场，但那种纯粹的观看，却悄悄变成了记忆里一小片发亮的草地。比赛还在继续，而你的故事，也还在和这片绿茵一起慢慢生长。
+        </div>
+
+        <!-- 小提示 和 补充 -->
+        <div class="footnote">
+            <span>⚡ 观看提醒：合理安排时间，感受比赛本身的节奏。</span>
+            <span>📅 2025 · 中超新赛季 · 每一轮都是新的篇章</span>
+        </div>
+    </div>
+</body>
+</html>
