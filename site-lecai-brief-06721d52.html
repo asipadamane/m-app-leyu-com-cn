@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>乐彩 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2f4f6;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e2a35;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* header / hero */
+    .hero {
+      background: #ffffff;
+      border: 1px solid #dce2e8;
+      border-radius: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 4px rgba(0, 0, 0, 0.02);
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #1a2632;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(145deg, #2b4b6f, #1c3548);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      max-width: 640px;
+      margin: 1rem auto 0;
+      color: #3e4f5e;
+      font-size: 1.05rem;
+    }
+
+    .hero .tagline {
+      margin-top: 0.6rem;
+      display: inline-block;
+      background: #eef2f6;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #2b4b6f;
+      border: 1px solid #dbe0e6;
+    }
+
+    /* layout: directory grid */
+    .directory-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 640px) {
+      .directory-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 960px) {
+      .directory-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #dce2e8;
+      border-radius: 20px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 0, 0, 0.02);
+      padding: 1.6rem 1.4rem;
+      transition: box-shadow 0.2s, transform 0.1s;
+    }
+
+    .card:hover {
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.03);
+      transform: translateY(-1px);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #1a2b3a;
+      margin-bottom: 0.7rem;
+      border-bottom: 1px solid #e6ebf0;
+      padding-bottom: 0.4rem;
+    }
+
+    .card ul, .card p {
+      font-size: 0.96rem;
+      color: #2e3f4e;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card li {
+      padding: 0.3rem 0;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .card li::before {
+      content: "·";
+      position: absolute;
+      left: 0.2rem;
+      color: #6b7f91;
+      font-weight: 600;
+    }
+
+    .card .highlight-link {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-weight: 500;
+    }
+
+    .card .highlight-link a {
+      text-decoration: none;
+      color: #2b4b6f;
+      border-bottom: 1px solid #cbd6e0;
+      transition: border-color 0.15s;
+    }
+
+    .card .highlight-link a:hover {
+      border-bottom-color: #1a2b3a;
+    }
+
+    /* info section (说明区 + 提示区) */
+    .info-panel {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 720px) {
+      .info-panel {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .info-card {
+      background: #ffffff;
+      border: 1px solid #dce2e8;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      padding: 1.6rem 1.4rem;
+    }
+
+    .info-card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      color: #1f3243;
+    }
+
+    .info-card p {
+      font-size: 0.96rem;
+      color: #2e3f4e;
+      margin-bottom: 0.6rem;
+    }
+
+    .info-card .meta-tag {
+      display: inline-block;
+      background: #edf2f7;
+      border-radius: 30px;
+      padding: 0.1rem 1rem;
+      font-size: 0.8rem;
+      color: #314b61;
+      margin-right: 0.3rem;
+      margin-bottom: 0.3rem;
+      border: 1px solid #d5dee6;
+    }
+
+    .tip-note {
+      background: #fafbfc;
+      border-left: 3px solid #7b93a8;
+      padding: 0.9rem 1.2rem;
+      border-radius: 12px;
+      margin-top: 0.8rem;
+    }
+
+    /* 相关信息区 */
+    .related-section {
+      background: #ffffff;
+      border: 1px solid #dce2e8;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      padding: 1.6rem 1.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .related-section h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #1f3243;
+      margin-bottom: 0.8rem;
+    }
+
+    .related-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+    }
+
+    .related-items a {
+      text-decoration: none;
+      color: #2b4b6f;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+      font-size: 0.95rem;
+    }
+
+    .related-items a:hover {
+      border-bottom: 1px solid #7b93a8;
+    }
+
+    .related-items .pill {
+      background: #edf2f7;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      border: 1px solid #d5dee6;
+      font-size: 0.88rem;
+      color: #1e3649;
+    }
+
+    /* faq summary (嵌入式) */
+    .faq-mini {
+      margin-top: 1.2rem;
+    }
+
+    .faq-mini details {
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid #e6ebf0;
+      padding-bottom: 0.4rem;
+    }
+
+    .faq-mini summary {
+      font-weight: 500;
+      font-size: 0.96rem;
+      cursor: pointer;
+      color: #1f3243;
+      padding: 0.2rem 0;
+    }
+
+    .faq-mini summary::-webkit-details-marker {
+      color: #7b93a8;
+    }
+
+    .faq-mini p {
+      margin: 0.4rem 0 0.2rem 0.6rem;
+      font-size: 0.9rem;
+      color: #364a5a;
+    }
+
+    .text-ref {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      padding: 0.6rem 0;
+    }
+
+    .text-ref a {
+      color: #2b4b6f;
+      text-decoration: none;
+      border-bottom: 1px solid #c2cedb;
+    }
+
+    .text-ref a:hover {
+      border-bottom-color: #1a2b3a;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #5a6f7e;
+      font-size: 0.85rem;
+      padding: 1.6rem 0.5rem 0.5rem;
+      border-top: 1px solid #dce2e8;
+      margin-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- hero -->
+  <header class="hero">
+    <h1><span>乐彩</span> · 知识索引</h1>
+    <p>快速了解网站定位、功能模块与常见问题，从这里开始。</p>
+    <div class="tagline">信息入口 · 目录导览</div>
+  </header>
+
+  <!-- 目录感卡片网格 -->
+  <div class="directory-grid">
+
+    <div class="card">
+      <div class="card-title">站点概览</div>
+      <ul>
+        <li>领域与内容定位</li>
+        <li>更新节奏与来源</li>
+        <li>用户群体画像</li>
+        <li>导航结构简述</li>
+      </ul>
+      <div class="highlight-link">
+        <a href="https://site-lecai.com">乐彩</a> · 首页
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">核心功能</div>
+      <ul>
+        <li>分类聚合浏览</li>
+        <li>关键词快速检索</li>
+        <li>动态信息面板</li>
+        <li>收藏与订阅提醒</li>
+      </ul>
+      <div class="text-ref">
+        了解更多，可参考 <a href="https://site-lecai.com">乐彩</a> 内说明。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">适用场景</div>
+      <ul>
+        <li>常备知识查询</li>
+        <li>行业资讯追踪</li>
+        <li>学习路径参考</li>
+        <li>工具与资源索引</li>
+      </ul>
+      <div class="highlight-link">
+        <a href="https://site-lecai.com">乐彩</a> 场景示例
+      </div>
+    </div>
+  </div>
+
+  <!-- 说明区 + 提示区 (两栏) -->
+  <div class="info-panel">
+
+    <div class="info-card">
+      <h3>说明区 · 内容组织方式</h3>
+      <p><span class="meta-tag">分类</span><span class="meta-tag">标签</span><span class="meta-tag">时间线</span></p>
+      <p>每个板块按主题整理，并附有简要注释与关联推荐。部分页面提供摘要与原始出处链接。</p>
+      <p>如果你需要系统了解某类信息，可使用站内指引跳转至对应集合页。</p>
+      <div class="tip-note">
+        💡 页面结构保持简洁，重点突出知识点本身，而非装饰。
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3>提示区 · 使用建议</h3>
+      <p>• 首次使用可花几分钟浏览顶部导航，了解分区逻辑。</p>
+      <p>• 如遇专业术语，鼠标悬停或点击可查看简短解释。</p>
+      <p>• 所有信息均来自公开资料或已授权内容，引用时保留出处。</p>
+      <div class="tip-note" style="border-left-color: #5d7f99;">
+        📌 建议使用桌面浏览器获得完整版式，移动端已适配纵向阅读。
+      </div>
+      <p style="margin-top: 0.5rem;">
+        若希望快速定位，可直接访问 <a href="https://site-lecai.com" style="color:#2b4b6f;border-bottom:1px solid #cbd6e0;text-decoration:none;">乐彩</a> 的搜索模块。
+      </p>
+    </div>
+  </div>
+
+  <!-- 相关信息区 + FAQ摘要 -->
+  <div class="related-section">
+    <h3>相关信息区</h3>
+    <div class="related-items">
+      <a href="https://site-lecai.com">乐彩</a>
+      <span class="pill">使用指南</span>
+      <span class="pill">内容协议</span>
+      <span class="pill">更新日志</span>
+      <span class="pill">联系反馈</span>
+      <span class="pill">友情链接</span>
+    </div>
+
+    <div class="faq-mini">
+      <details>
+        <summary>FAQ：乐彩 主要收录哪类信息？</summary>
+        <p>涵盖工具、教程、参考文档、行业分析等，侧重实用性与可检索性，不做泛娱乐化内容。</p>
+      </details>
+      <details>
+        <summary>FAQ：内容更新频率如何？</summary>
+        <p>根据板块不同，每周或每半月更新一次，并保留历史版本索引。</p>
+      </details>
+      <details>
+        <summary>FAQ：可以引用或分享站内内容吗？</summary>
+        <p>可以，但需注明原文链接，并遵守知识共享条款。具体参见页面底部声明。</p>
+      </details>
+    </div>
+
+    <div class="text-ref" style="margin-top:0.8rem; border-top:1px solid #e6ebf0; padding-top:0.8rem;">
+      想进一步了解网站定位？推荐阅读 <a href="https://site-lecai.com">乐彩</a> 的关于页面。
+    </div>
+  </div>
+
+  <!-- 一个自然嵌入链接的句子（符合要求） -->
+  <div style="background:#ffffff; border:1px solid #dce2e8; border-radius:20px; padding:1.2rem 1.6rem; box-shadow: 0 2px 6px rgba(0,0,0,0.02); margin-bottom:2rem;">
+    <p style="color: #2e3f4e; font-size:0.98rem;">
+      如果你正在寻找一个结构清晰、内容可信的信息集合地，不妨花几分钟熟悉一下 
+      <a href="https://site-lecai.com" style="color:#2b4b6f; border-bottom:1px solid #cbd6e0; text-decoration:none;">乐彩</a> 
+      的各个分区，或许能提高你后续的检索效率。
+    </p>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer-note">
+    乐彩 · 知识库入口 &nbsp;|&nbsp; 内容仅供参考，不构成专业建议
+  </div>
+
+</div>
+</body>
+</html>
